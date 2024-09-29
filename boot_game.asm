@@ -39,6 +39,9 @@ setup_game_state:
     in      al, 0x61
     and     al, 0xFC
     out     0x61, al
+    mov     di, (160*12) + 80    
+    mov     [snake_ptr], di
+
 
 draw_game_border:
     mov     ax, 0x072A
@@ -78,9 +81,9 @@ prepare_game:
     popa
 
     mov     di, cx
-    mov     si, initial_snake
+    mov     si, initial_snake    
     call    render_text
-    mov     bp, 6
+    mov     bp, 6               
     call    spawn_food
 
 game_delay:
@@ -267,7 +270,7 @@ title_text:        db 'Snake',0
 control_text:      db 'WASD, N - restart',0
 gameover_text:     db 'Game Over',0
 score_text:        db 'Score:',0
-initial_snake:     db '< * *',0    
+initial_snake:     db '      ',0    
 
 times 510-($-$$) db 0
 dw 0xAA55
